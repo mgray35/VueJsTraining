@@ -14,7 +14,7 @@ Topics
 
 * Introduction
 * Where does it fit
-* Front-end comparison https://stateofjs.com/2017/front-end/result
+* Front-end comparison https://stateofjs.com/2017/front-end/results
 * Tiny, ~30KB gzip production build
 
 #### Learn More:
@@ -55,6 +55,7 @@ var app = new Vue({
     data: {}
 });
 ```
+
 ---
 
 ### Basic Handlebars Template
@@ -76,6 +77,10 @@ var app = new Vue({
 7. Create Vue instance `var app = new Vue({ el: '#app' })` in script
 8. Add `data: {message: 'Hello World!'}` to Vue instance
 9. Open in browser to see Hello World!
+
+???
+
+* VM, console, this and arrow
 
 ---
 
@@ -106,8 +111,7 @@ The `v-model` directive binds two-ways the data object with an HTML input.
 3. Open in browser
 4. Change input field
 5. Message will retrieve the updated message
-6. Open debug console, run `app.$data.message = "VueJS rocks!"`
-7. Message will also update to reflect changes
+6. Message will also update to reflect changes
 
 ---
 
@@ -167,36 +171,24 @@ Vue.component('my-component', {
 #### Learn More:
 - https://vuejs.org/v2/guide/components.html#Props
 
----
+???
 
-### `V-bind` directive
-
-Shorthand
-```
-<my-checkbox v-model="foo" value="some value"></my-checkbox>
-```
-
-Expanded
-
-```html
-<my-checkbox
-  :checked="foo"
-  @change="val => { foo = val }"
-  value="some value">
-</my-checkbox>
-```
+* Props are the way to move smaller pieces in the application
+* State and props. Who owns who. TODO list whiteboard 
+this.message this.$props.message
 
 ---
 
 ### Exercise 4: Add Props
 
-1. Add props to the component `props: ['val']`
+1. Add props to the component `props: ['message']`
 2. Change the html to include your prop with value
-  - `<my-component val="Hello World!"></my-component>`
-3. Open the browser
-4. Change the component to bind Vue instance's message
+  - `<my-component message="Hello World!"></my-component>`
+3. Add handlebar for message to component template
+4. Open the browser
+5. Change the component to bind Vue instance's message
   - `<my-component v-bind:message="message"></my-component>`
-5. Open the browser
+6. Open the browser
 
 ```js
 Vue.component('my-component', {
@@ -211,20 +203,30 @@ Vue.component('my-component', {
 * Local data: must be a function!
 * Useful for forms or local view logic
 * Computed properties
-* Watch properties
 * Computed getters and setters
-* Methods vs computed vs watched
+* Methods vs computed
 * Vuex, state management, (later) is used for single state tree
 
 #### Learn More:
 - https://vuejs.org/v2/guide/computed.html
 - https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function
 
+???
+
+Data not a function
+
 ---
 
-#### Exercise 5: Add data and computed
+### Exercise 5: Add data and computed
 
-> Alex :D
+1. Use result of Exercise 4
+2. Add a data property as function to component that returns empty object
+3. Add a new property called now to the data object equal to `new Date()`
+4. Add handlebar for the now property right next to message
+5. Open in browser
+6. Create a computed property that concatenates message and now
+7. Update the handlebar to only use the computed property
+8. Open in browser
 
 ---
 
@@ -237,10 +239,10 @@ Vue.component('my-component', {
 ### Exercise 6: Use `v-for` Directive
 
 1. Create an array in the Vue instance
-  - `data: { people:[{fname: "john"}, {fname: "ann"}] }`
+  - `data: { people:[{firstName: "john"}, {firstName: "ann"}] }`
 2. Create an ul tag
 3. Create a li tag with v-for directive
-4. Output each members fname with handlebars
+4. Output each members firstName with handlebars
 
 
 ---
@@ -308,8 +310,6 @@ We will be sticking around if you have any questions
 1. Create a new component to render a person
 2. Change out the list to use the new component
 3. TODO: Add steps
-
-> Alex :D
 
 ---
 ## Components Part II
