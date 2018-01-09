@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-adv-intro": "./node_modules/.bin/markdown-to-slides ./src/adv-intro/lecture.md -o ./dist/lecture-adv-intro.html",
+    "build-adv-intro": "./node_modules/.bin/markdown-to-slides ./src/adv-intro/lecture.md -o ./docs/lecture-adv-intro.html",
     "build": "npm run build-adv-intro"
   },
   "author": "alexlepinski cass-sdg",
