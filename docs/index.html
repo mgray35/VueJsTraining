@@ -1,0 +1,71 @@
+<html>
+<style>
+    .site {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .site-content {
+        flex: 1;
+    }
+
+    .site-links {
+        display: flex;
+        flex-direction: column;
+        max-width: 125px;
+    }
+
+    .site-footer {
+        height: 50px;
+        width: 100%;
+        color: slategray;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+    }
+
+    .site-header {
+        height: 75px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+    }
+
+    .site-nav {
+        justify-content: space-between;
+        display: flex;
+    }
+
+    .container {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .footer-content {
+        justify-content: space-between;
+        display: flex;
+    }
+</style>
+
+<body class="site">
+    <header class="site-header">
+        <nav class="site-nav container">
+            <h1>CASS - SDG</h1>
+        </nav>
+    </header>
+    <main class="site-content container">
+        <h1>Welcome! VueJS Lectures</h1>
+        <div class="site-links">
+            <a href="lecture-adv-intro.html">VueJS Introduction</a>
+            <p>...more to come</p>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-content container">
+            <p>Center for Applied Systems & Software</p>
+        </div>
+    </footer>
+</body>
+
+</html>
