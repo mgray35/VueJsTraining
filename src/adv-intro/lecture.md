@@ -14,8 +14,11 @@ Topics
 
 * Introduction
 * Where does it fit
-* [Front-end comparison](https://stateofjs.com/2017/front-end/results)
+* Front-end comparison https://stateofjs.com/2017/front-end/result
 * Tiny, ~30KB gzip production build
+
+#### Learn More:
+* https://vuejs.org/v2/guide/
 
 ---
 
@@ -77,7 +80,6 @@ var app = new Vue({
 ---
 
 ## Vue Templates and Directives
-> For more information [VueJS docs](https://vuejs.org/v2/guide/syntax.html#Directives)
 
 Interpolation with handlebars syntax is the simplest thing to do in Vue templates. Vue directives are HTML attributes that enable iteration and conditional blocks in templates. Directives are special html attributes that use a `v-` prefix.
 
@@ -90,6 +92,9 @@ Interpolation with handlebars syntax is the simplest thing to do in Vue template
 - `v-on:event="handler"`
 - `v-model="value"`
 - `v-html="rawHtmlExpression"`
+
+#### Learn More:
+- https://vuejs.org/v2/guide/syntax.html#Directives
 
 ---
 
@@ -118,6 +123,9 @@ The `v-model` directive binds two-ways the data object with an HTML input.
   * Scoped CSS
   * Templates
   * Scripts
+
+#### Learn More:
+> https://vuejs.org/v2/guide/components.html
 
 
 ---
@@ -156,6 +164,28 @@ Vue.component('my-component', {
   * event
   * methods
 
+#### Learn More:
+- https://vuejs.org/v2/guide/components.html#Props
+
+---
+
+### `V-bind` directive
+
+Shorthand
+```
+<my-checkbox v-model="foo" value="some value"></my-checkbox>
+```
+
+Expanded
+
+```html
+<my-checkbox
+  :checked="foo"
+  @change="val => { foo = val }"
+  value="some value">
+</my-checkbox>
+```
+
 ---
 
 ### Exercise 4: Add Props
@@ -186,6 +216,10 @@ Vue.component('my-component', {
 * Methods vs computed vs watched
 * Vuex, state management, (later) is used for single state tree
 
+#### Learn More:
+- https://vuejs.org/v2/guide/computed.html
+- https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function
+
 ---
 
 #### Exercise 5: Add data and computed
@@ -211,11 +245,24 @@ Vue.component('my-component', {
 
 ---
 
+### Exercise: Use `v-for` with computed
+
+1. Create a component that outputs a single person
+2. Add property to take an object
+3. Add template to output firstname
+4. Replace html to use person-component for each li
+5. Verify in the browser all member first names are listed
+6. Create a computed property in person-component for full name
+7. Change the template to use computed property
+8. Open in browser
+
+---
+
 # Thank you!
 
 We will see you next Thursday for part 2
 
-Please fill out our [survey](https://goo.gl/32KMT2) - https://goo.gl/32KMT2
+Please fill out our survey https://goo.gl/32KMT2
 
 ## Questions?
 
@@ -434,7 +481,7 @@ The only way to render raw HTML into a template. Beware of cross-site scripting 
 
 # Thank you!
 
-Please fill out our [survey](https://goo.gl/32KMT2) - https://goo.gl/32KMT2
+Please fill out our survey https://goo.gl/32KMT2
 
 ## Questions?
 
