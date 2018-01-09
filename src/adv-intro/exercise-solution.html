@@ -1,0 +1,90 @@
+<html>
+
+<body>
+    <div id="app">
+        <h2>Contacts</h2>
+        {{message}}
+        <add-person v-on:add-person="addPerson"></add-person>
+        <list-people v-bind:people="people" v-on:delete-person="deletePerson"></list-people>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        Vue.component('add-person', {
+            template: `
+            <form v-on:submit.prevent="addHandler">
+                <input v-model="firstName">
+                <input v-model="lastName">
+                <button type="submit">
+                    Add {{ fullName }}
+                </button>
+            </form>`,
+            data: function () {
+                return {
+                    firstName: '',
+                    lastName: ''
+                }
+            },
+            computed: {
+                fullName() {
+                    return `${this.lastName}, ${this.firstName}`;
+                }
+            },
+            methods: {
+                addHandler: function () {
+                    var {
+                        firstName,
+                        lastName
+                    } = this;
+                    this.$emit('add-person', {
+                        firstName,
+                        lastName
+                    });
+                    this.firstName = '';
+                    this.lastName = '';
+                }
+            }
+        })
+
+        Vue.component('list-people', {
+            template: `<ul>
+            <li v-for="person, key in people">
+                <button v-on:click="deleteHandler(key)">X</button>
+                {{person.firstName}}
+            </li>
+        </ul>`,
+            props: ['people'],
+            methods: {
+                deleteHandler: function (key) {
+                    this.$emit('delete-person', key);
+                }
+            }
+
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello World!',
+                people: [{
+                    firstName: 'archer',
+                    lastName: 'sterling'
+                }, {
+                    firstName: 'cyril',
+                    lastName: 'figgis'
+                }]
+            },
+            methods: {
+                addPerson: function (person) {
+                    this.people.push(person);
+                },
+                deletePerson: function (key) {
+                    this.people.splice(key, 1);
+                }
+            }
+        });
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,21 @@
+<html>
+
+<body>
+    <div id="app">
+        <input v-model="message">
+        <br/> {{ message }}
+        <br/>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello World!'
+            }
+        });
+    </script>
+</body>
+
+</html>

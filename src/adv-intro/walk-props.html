@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    <div id="app">
+        No Message
+        <my-component></my-component>
+        <br/> Custom Message
+        <my-component message="hello! world!"></my-component>
+        <br /> Data bind
+        <my-component v-bind:message="message"></my-component>
+        <br/> Data bind v2
+        <my-component v-bind="$data"></my-component>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        Vue.component('my-component', {
+            props: ['message'],
+            template: `<div>Message: {{ message }}</div>`
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello World!'
+            }
+        });
+    </script>
+</body>
+
+</html>

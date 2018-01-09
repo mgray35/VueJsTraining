@@ -1,0 +1,21 @@
+<html>
+
+<body>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        Vue.component('my-component', {
+            template: `<div>Hello World</div>`
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello World!'
+            }
+        });
+    </script>
+</body>
+
+</html>
