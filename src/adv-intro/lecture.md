@@ -174,7 +174,7 @@ Vue.component('my-component', {
 ???
 
 * Props are the way to move smaller pieces in the application
-* State and props. Who owns who. TODO list whiteboard 
+* State and props. Who owns who. TODO list whiteboard
 this.message this.$props.message
 
 ---
@@ -272,7 +272,7 @@ We will be sticking around if you have any questions
 
 ---
 
-# Lecture 2 
+# Lecture 2
 > No-build pipeline tutorial for VueJS part 2
 
 ## Presenters
@@ -281,14 +281,98 @@ We will be sticking around if you have any questions
 
 ---
 
+## Vue's view model
+
+```js
+Vue.component('my-component', {
+  template: `<input :disabled="isDisabled">`,
+  props: ['initialValue'],
+  data: function () {
+    return { isDisabled: false };
+  },
+  computed: {
+    constant () { return 'something constant'; }
+  },
+  methods: {
+    someHandler () { }
+  }
+})
+```
+
+```js
+{
+  // this
+  initialValue,
+  isDisabled,
+  constant,
+  someHandler,
+  ...
+}
+```
+
+---
+## View model & `v-bind`
+
+```js
+Vue.component('my-component', {
+  template: `<input :disabled="isDisabled">`,
+  props: ['initialValue'],
+  data: function () {
+    return { isDisabled: false };
+  },
+  computed: {
+    constant () { return 'something constant'; }
+  },
+  methods: {
+    someHandler () { }
+  }
+})
+```
+
+```html
+<input> <!-- this.isDisabled = false; -->
+<input disabled> <!-- this.isDisabled = true; -->
+<input disabled="boat"> <!-- this.isDisabled = `boat`; -->
+```
+
+---
 ## Events and `v-on` Directive
 
 * Pass data
-* Update dom
+* Update DOM
 * Call API
 * Much more
 * Use `this.$emit` to create an event
 * Subscribe to event by `v-on:event-name` or `@event-name`
+
+---
+### Event Examples
+
+Inputs fire their own events.
+```js
+Vue.component('my-component', {
+  template: `<button @click="handleClick">click me</button>`,
+  methods: {
+    handleClick () { alert('We were clicked!'); }
+  }
+});
+```
+
+Components can trigger custom events too.
+```js
+Vue.component('my-component', {
+  template: `<button v-on:click="handleClick">click me</button>`,
+  methods: {
+    handleClick () { this.$emit('anything'); }
+  }
+});
+```
+
+```js
+Vue.component('my-component', {
+  template: `<button @click="$emit('anything')">click me</button>`
+});
+```
 
 ---
 ### Exercise 7: Add and use custom events
@@ -304,7 +388,77 @@ We will be sticking around if you have any questions
 * Reusing
 
 ---
+### Event Hierarchy 1
+> A complex example
 
+```html
+<div id="app">
+  <thing-list :list="things" @remove="removeTitle">
+    <!-- might look something like this: -->
+    <!--
+      <person v-for="p in persons" data="p" @remove="remove(p)"/>
+    -->
+  </thing-list>
+  <input @keypress.enter="addTitle($event.target.value)">
+</div>
+```
+
+---
+### Event Hierarchy 2
+
+```js
+Vue.component('thing-item', {
+  props: ['title'],
+  template: `
+    <li>
+      <span>{{ title }}</span>
+      <button @click="$emit('remove')">remove</button>
+    </li>
+  `
+});
+
+Vue.component('thing-list', {
+  props: ['list'],
+  template: `
+    <ul>
+      <thing-item
+        v-for="thing in list"
+        :key="thing.title"
+        :title="thing.title"
+        @remove="$emit('remove', thing.title)"
+      />
+    </ul>
+  `
+});
+```
+
+---
+### Event Hierarchy 3
+
+```js
+var vm = new Vue({
+  el: '#app',
+  data: {
+    things: [
+      { title: 'boat' },
+      { title: 'hover board' },
+      { title: 'space ship' }
+    ]
+  },
+  methods: {
+    removeTitle(title) {
+      this.things = this.things.filter(function (item) {
+        return item.title !== title;
+      })
+    },
+    addTitle(title) {
+      this.things.push({ title: title });
+    }
+  }
+});
+```
+
+---
 ### Exercise 8: Break up code
 
 1. Create a new component to render a person
@@ -326,9 +480,12 @@ Vue.component('other-component', {
 })
 ```
 
----
+```html
+<div>Hello world!</div>
+```
 
-### Global Scoped Components
+---
+### Global vs Local Scoped Components
 So far we have been using global scoped components.
 
 ```js
@@ -336,12 +493,12 @@ Vue.component('my-component', {
   props: ['message']
   template: `<div>{{ message }}</div>`
 })
+var app = new Vue({
+    el: "#app"
+});
 ```
 
----
-
-### Local Scoped Components
-
+Instead, skip the Vue.component call:
 ```js
 var MyComponent = {
   props: ['message']
