@@ -1,0 +1,57 @@
+<html>
+<body>
+  <div id="app">
+    <thing-list :list="things" @remove="removeTitle"></thing-list>
+    <input @keypress.enter="addTitle($event.target.value)">
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+
+    Vue.component('thing-item', {
+      props: ['title'],
+      template: `
+        <li>
+          <span>{{ title }}</span>
+          <button @click="$emit('remove')">remove</button>
+        </li>
+      `
+    });
+
+    Vue.component('thing-list', {
+      props: ['list'],
+      template: `
+        <ul>
+          <thing-item
+            v-for="thing in list"
+            :key="thing.title"
+            :title="thing.title"
+            @remove="$emit('remove', thing.title)"
+          />
+        </ul>
+      `
+    });
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        things: [
+          { title: 'boat' },
+          { title: 'hover board' },
+          { title: 'space ship' }
+        ]
+      },
+      methods: {
+        removeTitle(title) {
+          this.things = this.things.filter(function (item) {
+            return item.title !== title;
+          })
+        },
+        addTitle(title) {
+          this.things.push({ title: title });
+        }
+      }
+    });
+
+  </script>
+</body>
+</html>
