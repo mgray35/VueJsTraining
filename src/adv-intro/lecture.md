@@ -290,10 +290,21 @@ We will be sticking around if you have any questions
 * Use `this.$emit` to create an event
 * Subscribe to event by `v-on:event-name` or `@event-name`
 
----
-### Exercise 7: Add and use custom events
+### Code Walk: Custom Events
 
-> Alex :D
+---
+
+### Exercise 7: Add and use custom events
+1. Using Exercise 6 `v-for` people
+2. Add a method on the app instance to remove a person with the given index
+3. In the person component, add a button with text "X"
+4. Add a prop labeled index to the component
+5. Add a method to handle the onclick in the component
+6. Add this.$emit(event-name, value) to the click handler
+7. Update the button to include the `v-on:click`
+8. Within the `v-for` person component, bind the custom event `v-on="event-name"
+9. Open up the browser
+
 
 ---
 ## Application Hierarchy

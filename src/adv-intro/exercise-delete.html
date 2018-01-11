@@ -1,0 +1,58 @@
+<html>
+
+<body>
+    <div id="app">
+        <h1>Event Example</h1>
+        <br/>
+        <p>Message: {{ message }}</p>
+        <ul>
+            <li v-for="(item, index) in people">
+                <person :person="item" :index="index" v-on:delete-person="removePerson(index)"></person>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        Vue.component('person', {
+            props: ['person'],
+            template: `
+                <span>
+                    {{ fullName }} 
+                    <button v-on:click="handleDelete">X</button>
+                </span>`,
+            computed: {
+                fullName: function () {
+                    return `${this.person.lastName}, ${this.person.firstName}`;
+                }
+            },
+            methods: {
+                handleDelete: function () {
+                    this.$emit('delete-person');
+                }
+            }
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello World!',
+                people: [{
+                    firstName: "jenny",
+                    lastName: "jennerson"
+                }, {
+
+                    firstName: "randy",
+                    lastName: "randerson"
+                }]
+            },
+            methods: {
+                removePerson(index) {
+                    console.log(index);
+                    this.people.splice(index, 1);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

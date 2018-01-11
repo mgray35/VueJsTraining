@@ -1,0 +1,64 @@
+<html>
+
+<body>
+    <div id="app">
+        <h1>Event Example</h1>
+        <br/>
+        <p>Message: {{ message }}</p>
+        <ul>
+            <li v-for="p in people">
+                <person v-bind:person="p" v-on:greet="updateMessage"></person>
+
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        Vue.component('person', {
+            props: ['person'],
+            template: `
+                <span>
+                    {{ fullName }} 
+                    <button v-on:click="handleGreet">Greet</button>
+                </span>`,
+            data: function () {
+            },
+            computed: {
+                fullName: function () {
+                    return `${this.person.lastName}, ${this.person.firstName}`;
+                },
+                greet: function () {
+                    return `Hello, from ${this.fullName}`;
+                }
+
+            },
+            methods: {
+                handleGreet: function () {
+                    this.$emit('greet', this.greet);
+                }
+            }
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello World!',
+                people: [{
+                    firstName: "jenny",
+                    lastName: "jennerson"
+                }, {
+
+                    firstName: "randy",
+                    lastName: "randerson"
+                }]
+            },
+            methods: {
+                updateMessage(message) {
+                    this.message = message;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
