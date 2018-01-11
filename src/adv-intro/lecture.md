@@ -345,8 +345,6 @@ Vue.component('my-component', {
 * Use `this.$emit` to create an event
 * Subscribe to event by `v-on:event-name` or `@event-name`
 
-### Code Walk: Custom Events
-
 ---
 ### Event Examples
 
@@ -376,6 +374,8 @@ Vue.component('my-component', {
 });
 ```
 
+#### Code Walk: Custom Events
+
 ---
 ### Exercise 7: Add and use custom events
 1. Using Exercise 6 `v-for` people
@@ -392,7 +392,6 @@ Vue.component('my-component', {
 ---
 ## Application Hierarchy
 
-* TODO: add graphic
 * SOC
 * Testing
 * Reusing
@@ -468,14 +467,6 @@ var vm = new Vue({
 });
 ```
 
----
-### Exercise 8: Break up code
-
-1. Create a new component to render a person
-2. Change out the list to use the new component
-3. TODO: Add steps
-
----
 ## Components Part II
 
 ### Default Slot
@@ -525,6 +516,9 @@ var app = new Vue({
 
 ### Final Exercise
 Create an invoice demo that allows a user to enter a customer's name, a list of products purchased, and an calculated total price. Create the HTML layout, break it into components, add props, then add events to buttons and handle those events.
+
+#### Break Up Code
+
 
 ---
 ## Template Directives Explained
