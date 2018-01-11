@@ -355,6 +355,8 @@ We will be sticking around if you have any questions
 
 ## Vue's view model
 
+???
+
 ```js
 Vue.component('my-component', {
   template: `<input :disabled="isDisabled">`,
@@ -382,7 +384,6 @@ Vue.component('my-component', {
 }
 ```
 
----
 ## View model & `v-bind`
 
 ```js
@@ -408,6 +409,7 @@ Vue.component('my-component', {
 ```
 
 ---
+
 ## Events and `v-on` Directive
 
 * Pass data
@@ -418,7 +420,10 @@ Vue.component('my-component', {
 * Subscribe to event by `v-on:event-name` or `@event-name`
 
 ---
+
 ### Event Examples
+
+???
 
 Inputs fire their own events.
 ```js
@@ -449,6 +454,7 @@ Vue.component('my-component', {
 #### Code Walk: Custom Events
 
 ---
+
 ### Exercise 7: Add and use custom events
 1. Using Exercise 6 `v-for` people
 2. Add a method on the app instance to remove a person with the given index
@@ -462,6 +468,7 @@ Vue.component('my-component', {
 
 
 ---
+
 ## Application Hierarchy
 
 * SOC
@@ -469,75 +476,11 @@ Vue.component('my-component', {
 * Reusing
 
 ---
-### Event Hierarchy 1
+
+### Event Hierarchy
 > A complex example
 
-```html
-<div id="app">
-  <thing-list :list="things" @remove="removeTitle">
-    <!-- might look something like this: -->
-    <!--
-      <person v-for="p in persons" data="p" @remove="remove(p)"/>
-    -->
-  </thing-list>
-  <input @keypress.enter="addTitle($event.target.value)">
-</div>
-```
-
----
-### Event Hierarchy 2
-
-```js
-Vue.component('thing-item', {
-  props: ['title'],
-  template: `
-    <li>
-      <span>{{ title }}</span>
-      <button @click="$emit('remove')">remove</button>
-    </li>
-  `
-});
-
-Vue.component('thing-list', {
-  props: ['list'],
-  template: `
-    <ul>
-      <thing-item
-        v-for="thing in list"
-        :key="thing.title"
-        :title="thing.title"
-        @remove="$emit('remove', thing.title)"
-      />
-    </ul>
-  `
-});
-```
-
----
-### Event Hierarchy 3
-
-```js
-var vm = new Vue({
-  el: '#app',
-  data: {
-    things: [
-      { title: 'boat' },
-      { title: 'hover board' },
-      { title: 'space ship' }
-    ]
-  },
-  methods: {
-    removeTitle(title) {
-      this.things = this.things.filter(function (item) {
-        return item.title !== title;
-      })
-    },
-    addTitle(title) {
-      this.things.push({ title: title });
-    }
-  }
-});
-```
+* See example-hierarchy.html
 
 ## Components Part II
 
@@ -558,6 +501,7 @@ Vue.component('other-component', {
 ```
 
 ---
+
 ### Global vs Local Scoped Components
 So far we have been using global scoped components.
 
@@ -570,6 +514,9 @@ var app = new Vue({
     el: "#app"
 });
 ```
+
+---
+### Local Example
 
 Instead, skip the Vue.component call:
 ```js
@@ -584,6 +531,7 @@ var app = new Vue({
     }
 });
 ```
+
 ---
 
 ### Final Exercise
@@ -593,6 +541,7 @@ Create an invoice demo that allows a user to enter a customer's name, a list of 
 
 
 ---
+
 ## Template Directives Explained
 
 ### `v-if` Directive

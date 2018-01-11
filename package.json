@@ -5,8 +5,9 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-adv-intro": "./node_modules/.bin/markdown-to-slides ./src/adv-intro/lecture.md -o ./docs/lecture-adv-intro.html",
-    "build": "npm run build-adv-intro"
+    "build-adv-intro-1": "./node_modules/.bin/markdown-to-slides ./src/adv-intro/lecture.md -o ./docs/lecture-adv-intro.html",
+    "build-adv-intro-2": "./node_modules/.bin/markdown-to-slides ./src/adv-intro/lecture2.md -o ./docs/lecture-adv-intro-2.html",
+    "build": "npm run build-adv-intro-1 && npm run build-adv-intro-2"
   },
   "author": "alexlepinski cass-sdg",
   "license": "ISC",
