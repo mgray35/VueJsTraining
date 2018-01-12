@@ -1,0 +1,19 @@
+<html>
+<body>
+  <div id="app">
+    <h2>Purchases</h2>
+    <invoice-list
+      :list="products"
+      :total="totalPrice"
+      @change="changeItem"
+      @remove="removeItem"
+      @addnew="addItem">
+    </invoice-list>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="invoice-customer.js"></script>
+  <script src="invoice-list.js"></script>
+  <script src="invoice-row.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
