@@ -141,12 +141,20 @@ var app = new Vue({
 ### Exercise 1: Using Vue and handlebars
 
 1. Create an index.html file
-2. Create html and body elements
-3. Create div element with id app in body `<div id="app"></div>`
-4. Add `{{ message }}` within div app
-5. Add `<script src="https://cdn.jsdelivr.net/npm/vue"></script>`
-6. Create script tag
-7. Create Vue instance `var app = new Vue({ el: '#app' })` in script
+2. Create `html` and `body` elements
+3. Create `<div/>` element with id `app` in body
+```html
+<div id="app"></div>
+```
+4. Add `{{ message }}` within the `app` div
+5. Add the Vue cdn to your html document
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+```
+7. Create a Vue instance in a separate `<script/>` tag
+```js
+var app = new Vue({ el: '#app' })
+```
 8. Add `data: {message: 'Hello World!'}` to Vue instance
 9. Open in browser to see Hello World!
 
@@ -176,12 +184,12 @@ Interpolation with handlebars syntax is the simplest thing to do in Vue template
 ---
 
 ### Exercise 2: Add `v-model` Directive
-The `v-model` directive binds two-ways the data object with an HTML input.
+The `v-model` directive binds the data object with an HTML input two ways.
 
 1. Open Exercise hello world
-2. Add `<input v-model="message">` within div app
+2. Add `<input v-model="message">` within the `#app` div
 3. Open in browser
-4. Change input field
+4. Change the input field
 5. Message will retrieve the updated message
 6. Message will also update to reflect changes
 
@@ -193,7 +201,7 @@ The `v-model` directive binds two-ways the data object with an HTML input.
 * Props (attributes you can use)
 * Data (each component has its own state)
 * Computed values (automatically recomputes on changed data)
-* SOC Great for managing and reusing code
+* Separation of concerns, Great for managing and reusing code
 * Makes testing easy
 * In the future, use build tools and SFC for larger applications
   * Scoped CSS
@@ -208,8 +216,8 @@ The `v-model` directive binds two-ways the data object with an HTML input.
 
 ### Exercise 3: Add Component
 
-1. Register a new component
-2. Change the html to include your component tag `<my-component></my-component>`
+1. Create and register a new Vue component
+2. Change the html to include your component tag `<my-component/>`
 3. Open in browser
 
 ```js
@@ -222,23 +230,26 @@ Vue.component('my-component', {
 
 ### Component Props
 
-* One direction flow
-* Parent passes props to child
-* Parent can modify and child cannot (should not)
-* Dynamic props
-  * `v-bind` prop updates will flow to child components
-* Prop validation! multiple types, required, and defaults!
-  * String
-  * Number
-  * Boolean
-  * Function
-  * Object
-  * Array
-  * Symbol
-* Child can call parent to update props
-  * sync
-  * event
-  * methods
+* Unidirectional data flow
+* Parents pass props to children
+* Parent modify props and children cannot (should not)
+* Dynamic props:
+  * `v-bind` prop updates will flow to child components.
+* Prop are validated using JS native types:
+  * String, Number, Boolean, Function, Object, Array, Symbol
+* Child can call parent to update props:
+  * sync, event, methods
+
+```
+props: {
+  text: {
+    type: Boolean,
+    required: true
+  }
+}
+...
+props: ["text"]
+```
 
 #### Learn More:
 - https://vuejs.org/v2/guide/components.html#Props
@@ -253,7 +264,7 @@ this.message this.$props.message
 
 ### Exercise 4: Add Props
 
-1. Add props to the component `props: ['message']`
+1. Add props to your component `props: ['message']`
 2. Change the html to include your prop with value
   - `<my-component message="Hello World!"></my-component>`
 3. Add handlebar for message to component template
@@ -272,7 +283,7 @@ Vue.component('my-component', {
 ---
 ### Component State
 
-* Local data: must be a function!
+* Local data: must be accessed with a function
 * Useful for forms or local view logic
 * Computed properties
 * Computed getters and setters
@@ -292,11 +303,11 @@ Data not a function
 ### Exercise 5: Add data and computed
 
 1. Use result of Exercise 4
-2. Add a data property as function to component that returns empty object
-3. Add a new property called now to the data object equal to `new Date()`
-4. Add handlebar for the now property right next to message
+2. Add a `data` property as function to your component that returns empty object
+3. Add a new property called `now` to the returned object equal to `new Date()`
+4. Add handlebar for the `now` property right next to `message`
 5. Open in browser
-6. Create a computed property that concatenates message and now
+6. Create a computed property that concatenates `message` and `now`
 7. Update the handlebar to only use the computed property
 8. Open in browser
 
@@ -306,15 +317,33 @@ Data not a function
 
 * Vue directive to iterate over a collection to produce html elements
 
+```html
+  <script>
+    var array = [1,2,3,4,5];
+  </script>
+  <ul>
+    <li v-for="item in array">{{item}}</li>
+  </ul>
+```
+
 ---
 
 ### Exercise 6: Use `v-for` Directive
 
 1. Create an array in the Vue instance
-  - `data: { people:[{firstName: "john"}, {firstName: "ann"}] }`
-2. Create an ul tag
-3. Create a li tag with v-for directive
-4. Output each members firstName with handlebars
+
+```js
+data: { 
+  people: [
+    {firstName: "Timothy", lastName: "Typist"}, 
+    {firstName: "Hannah", lastName: "Hacker"}
+  ] 
+}
+```
+
+2. Create a `<ul/>` tag
+3. Create a `<li/>` tag with `v-for` directive
+4. Output each member's `firstName` with handlebars
 
 
 ---
