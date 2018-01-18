@@ -231,13 +231,13 @@ Vue.component('my-component', {
 ### Component Props
 
 * Unidirectional data flow
-* Parents pass props to children
-* Parent modify props and children cannot (should not)
-* Dynamic props:
+* Parents their local data to children as `props`
+* Children only access `props`, DO NOT manipulate props in chldren.
+* Dynamic `props`:
   * `v-bind` prop updates will flow to child components.
-* Prop are validated using JS native types:
+* `props` are validated using JS native types:
   * String, Number, Boolean, Function, Object, Array, Symbol
-* Child can call parent to update props:
+* Child can call parent to update `props`:
   * sync, event, methods
 
 ```
