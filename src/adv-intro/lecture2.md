@@ -3,6 +3,7 @@
 
 ## Presenters
 * Robert Macdonald, CASS, Junior SDE
+* Dan Van Horn, CASS, Junior SDE
 * Alex Lepinski, CASS, SDE
 
 ---
