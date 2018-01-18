@@ -159,13 +159,13 @@ Vue.component('my-component', {
 ### Component Props
 
 * Unidirectional data flow
-* Parents pass props to children
-* Parent modify props and children cannot (should not)
-* Dynamic props:
+* Parents their local data to children as `props`
+* Children only access `props`, DO NOT manipulate props in chldren.
+* Dynamic `props`:
   * `v-bind` prop updates will flow to child components.
-* Prop are validated using JS native types:
+* `props` are validated using JS native types:
   * String, Number, Boolean, Function, Object, Array, Symbol
-* Child can call parent to update props:
+* Child can call parent to update `props`:
   * sync, event, methods
 
 ```
@@ -273,17 +273,16 @@ data: {
 3. Create a `<li/>` tag with `v-for` directive
 4. Output each member's `firstName` with handlebars
 
-
 ---
 
 ### Exercise: Use `v-for` with computed
 
 1. Create a component that outputs a single person
 2. Add property to take an object
-3. Add template to output firstname
-4. Replace html to use person-component for each li
+3. Add template to output `firstName`
+4. Replace html to use person-component for each `<li/>`
 5. Verify in the browser all member first names are listed
-6. Create a computed property in person-component for full name
+6. Create a computed property `fullName` in person-component that concatenates `firstName` and `lastName`. 
 7. Change the template to use computed property
 8. Open in browser
 
@@ -298,5 +297,3 @@ Please fill out our survey https://goo.gl/32KMT2
 ## Questions?
 
 We will be sticking around if you have any questions
-
----

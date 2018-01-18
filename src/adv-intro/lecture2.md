@@ -1,4 +1,3 @@
-
 # Lecture 2
 > No-build pipeline tutorial for VueJS part 2
 
@@ -38,6 +37,8 @@ Vue.component('my-component', {
 }
 ```
 
+---
+
 ## View model & `v-bind`
 
 ```js
@@ -68,7 +69,7 @@ Vue.component('my-component', {
 
 * Pass data
 * Update DOM
-* Call API
+* Call an API
 * Much more
 * Use `this.$emit` to create an event
 * Subscribe to event by `v-on:event-name` or `@event-name`
@@ -77,9 +78,8 @@ Vue.component('my-component', {
 
 ### Event Examples
 
-???
-
 Inputs fire their own events.
+
 ```js
 Vue.component('my-component', {
   template: `<button @click="handleClick">click me</button>`,
@@ -105,27 +105,29 @@ Vue.component('my-component', {
 });
 ```
 
+---
+
 #### Code Walk: Custom Events
 
 ---
 
 ### Exercise 7: Add and use custom events
+
 1. Using Exercise 6 `v-for` people
 2. Add a method on the app instance to remove a person with the given index
 3. In the person component, add a button with text "X"
 4. Add a prop labeled index to the component
 5. Add a method to handle the onclick in the component
-6. Add this.$emit(event-name, value) to the click handler
+6. Add `this.$emit(event-name, value)` to the click handler
 7. Update the button to include the `v-on:click`
-8. Within the `v-for` person component, bind the custom event `v-on="event-name"
+8. Within the `v-for` person component, bind the custom event `v-on="event-name"`
 9. Open up the browser
-
 
 ---
 
-## Application Hierarchy
+### Application Hierarchy
 
-* SOC
+* Separation of Concerns
 * Testing
 * Reusing
 
@@ -139,6 +141,7 @@ Vue.component('my-component', {
 ## Components Part II
 
 ### Default Slot
+
 - Add the special `<slot/>` tag to render the children of a component.
 
 ```js
@@ -153,9 +156,7 @@ Vue.component('other-component', {
 ```html
 <div>Hello world!</div>
 ```
-
 ---
-
 ### Global vs Local Scoped Components
 So far we have been using global scoped components.
 
@@ -168,7 +169,6 @@ var app = new Vue({
     el: "#app"
 });
 ```
-
 ---
 ### Local Example
 
@@ -185,17 +185,12 @@ var app = new Vue({
     }
 });
 ```
-
 ---
-
 ### Final Exercise
 Create an invoice demo that allows a user to enter a customer's name, a list of products purchased, and an calculated total price. Create the HTML layout, break it into components, add props, then add events to buttons and handle those events.
 
 #### Break Up Code
-
-
 ---
-
 ## Template Directives Explained
 
 ### `v-if` Directive
@@ -212,9 +207,7 @@ If you want to leave the HTML on the page, but just hide it, use `v-show` instea
 ```html
 <span v-show="user">Logged in as {{ user.name }}.</span>
 ```
-
 ---
-
 Use the `key` attribute on elements inside of `v-if` blocks to help Vue destroy instead of reuse children.
 
 ```html
@@ -225,7 +218,6 @@ Use the `key` attribute on elements inside of `v-if` blocks to help Vue destroy 
    <input type="text" key="text-input">
 </span>
 ```
-
 ---
 ### `v-for` Directive
 
@@ -251,7 +243,6 @@ Create an element for every item in the list. Include a `key` attribute with uni
 </span>
 ```
 ---
-
 Trigger Updates:
 
 * list.push()
@@ -262,9 +253,7 @@ Trigger Updates:
 * list.sort()
 * list.reverse()
 * list = list.filter(filterFn)
-
 ---
-
 ### `v-bind:attr` Directive
 
 Connects components state and any HTML attribute.
@@ -273,7 +262,6 @@ Connects components state and any HTML attribute.
 <progress v-bind:value="currentStep" max="10"></progress>
 <progress :value="currentStep" max="10"></progress>
 ```
-
 ---
 ### `v-on:event` Directive
 
@@ -294,9 +282,7 @@ This directive accepts both the name of methods and an expression of methods. Th
   </li>
 </ul>
 ```
-
 ---
-
 ### `v-model` Directive
 
 A shorthand for listening to input events.
@@ -314,7 +300,6 @@ The only way to render raw HTML into a template. Beware of cross-site scripting 
 <div v-html="helpDocHtml"></div>
 ```
 ---
-
 # Thank you!
 
 Please fill out our survey https://goo.gl/32KMT2
