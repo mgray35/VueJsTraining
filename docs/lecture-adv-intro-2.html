@@ -86,7 +86,7 @@ code {
 
 ```js
 Vue.component('my-component', {
-  template: `<input :disabled="isDisabled">`,
+  template: `<input v-bind:disabled="isDisabled">`,
   props: ['initialValue'],
   data: function () {
     return { isDisabled: false };
@@ -117,7 +117,7 @@ Vue.component('my-component', {
 
 ```js
 Vue.component('my-component', {
-  template: `<input :disabled="isDisabled">`,
+  template: `<input v-bind:disabled="isDisabled">`,
   props: ['initialValue'],
   data: function () {
     return { isDisabled: false };
@@ -131,11 +131,23 @@ Vue.component('my-component', {
 })
 ```
 
+### `v-bind:attr` Directive
+
+Connects components state and any HTML attribute. You can omit the `v-bind` and
+simply prepend a `:` to variable you'd like to bind. 
+
+```html
+<progress v-bind:value="currentStep" max="10"></progress>
+<progress :value="currentStep" max="10"></progress>
+```
+
 ```html
 <input> <!-- this.isDisabled = false; -->
 <input disabled> <!-- this.isDisabled = true; -->
 <input disabled="boat"> <!-- this.isDisabled = `boat`; -->
 ```
+
+
 
 ---
 
@@ -218,12 +230,12 @@ Vue.component('my-component', {
 * Testing
 * Reusing
 
----
-
 ### Event Hierarchy
 > A complex example
 
 * See example-hierarchy.html
+
+---
 
 ## Components Part II
 
@@ -298,13 +310,6 @@ Include or exclude the element and anything inside of it.
 <span v-if="user">Logged in as {{ user.name }}.</span>
 <span v-else>Optional else block.</span>
 ```
-
-If you want to leave the HTML on the page, but just hide it, use `v-show` instead.
-
-```html
-<span v-show="user">Logged in as {{ user.name }}.</span>
-```
----
 Use the `key` attribute on elements inside of `v-if` blocks to help Vue destroy instead of reuse children.
 
 ```html
@@ -315,7 +320,14 @@ Use the `key` attribute on elements inside of `v-if` blocks to help Vue destroy 
    <input type="text" key="text-input">
 </span>
 ```
+
+If you want to leave the HTML on the page, but just hide it, use `v-show` instead.
+
+```html
+<span v-show="user">Logged in as {{ user.name }}.</span>
+```
 ---
+
 ### `v-for` Directive
 
 Create an element for every item in the list. Include a `key` attribute with unique identifiers to help Vue render efficiently.
@@ -354,16 +366,6 @@ Trigger Updates:
 
 * JS Array docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-
----
-### `v-bind:attr` Directive
-
-Connects components state and any HTML attribute.
-
-```html
-<progress v-bind:value="currentStep" max="10"></progress>
-<progress :value="currentStep" max="10"></progress>
-```
 ---
 ### `v-on:event` Directive
 
