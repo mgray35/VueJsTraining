@@ -115,24 +115,6 @@ Vue.component('my-component', {
 
 ## View model & `v-bind`
 
-```js
-Vue.component('my-component', {
-  template: `<input v-bind:disabled="isDisabled">`,
-  props: ['initialValue'],
-  data: function () {
-    return { isDisabled: false };
-  },
-  computed: {
-    constant () { return 'something constant'; }
-  },
-  methods: {
-    someHandler () { }
-  }
-})
-```
-
-### `v-bind:attr` Directive
-
 Connects components state and any HTML attribute. You can omit the `v-bind` and
 simply prepend a `:` to variable you'd like to bind. 
 
