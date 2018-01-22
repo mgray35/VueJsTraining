@@ -13,7 +13,7 @@
 
 ```js
 Vue.component('my-component', {
-  template: `<input :disabled="isDisabled">`,
+  template: `<input v-bind:disabled="isDisabled">`,
   props: ['initialValue'],
   data: function () {
     return { isDisabled: false };
@@ -42,20 +42,12 @@ Vue.component('my-component', {
 
 ## View model & `v-bind`
 
-```js
-Vue.component('my-component', {
-  template: `<input :disabled="isDisabled">`,
-  props: ['initialValue'],
-  data: function () {
-    return { isDisabled: false };
-  },
-  computed: {
-    constant () { return 'something constant'; }
-  },
-  methods: {
-    someHandler () { }
-  }
-})
+Connects components state and any HTML attribute. You can omit the `v-bind` and
+simply prepend a `:` to variable you'd like to bind. 
+
+```html
+<progress v-bind:value="currentStep" max="10"></progress>
+<progress :value="currentStep" max="10"></progress>
 ```
 
 ```html
@@ -64,22 +56,36 @@ Vue.component('my-component', {
 <input disabled="boat"> <!-- this.isDisabled = `boat`; -->
 ```
 
+
+
 ---
 
 ## Events and `v-on` Directive
 
-* Pass data
-* Update DOM
-* Call an API
-* Much more
 * Use `this.$emit` to create an event
+
+```js
+methods: {
+  createEvent: function() { this.$emit('my-event')}
+}
+```
+
 * Subscribe to event by `v-on:event-name` or `@event-name`
 
+```html
+  <my-component v-on:my-event="doSomething"></my-component>
+```
+
+* You can
+  * Pass data
+  * Update DOM
+  * Call an API
+  * Much more
 ---
 
 ### Event Examples
 
-Inputs fire their own events.
+Events like `click`, `change` etc. are built into Javascript by default, so Vue can use them.
 
 ```js
 Vue.component('my-component', {
@@ -90,12 +96,13 @@ Vue.component('my-component', {
 });
 ```
 
-Components can trigger custom events too.
+Your components can trigger custom events too.
+
 ```js
 Vue.component('my-component', {
   template: `<button v-on:click="handleClick">click me</button>`,
   methods: {
-    handleClick () { this.$emit('anything'); }
+    handleClick () { this.$emit('my-custom-event'); }
   }
 });
 ```
@@ -132,12 +139,12 @@ Vue.component('my-component', {
 * Testing
 * Reusing
 
----
-
 ### Event Hierarchy
 > A complex example
 
 * See example-hierarchy.html
+
+---
 
 ## Components Part II
 
@@ -188,7 +195,17 @@ var app = new Vue({
 ```
 ---
 ### Final Exercise
-Create an invoice demo that allows a user to enter a customer's name, a list of products purchased, and an calculated total price. Create the HTML layout, break it into components, add props, then add events to buttons and handle those events.
+Create an invoice demo that allows a user to enter: 
+* a customer's name 
+* a list of products purchased
+* a calculated total price. 
+
+
+1. Create the HTML layout,
+2. break it into components
+3. add props
+4. add events to buttons
+5. handle those events.
 
 #### Break Up Code
 ---
@@ -202,13 +219,6 @@ Include or exclude the element and anything inside of it.
 <span v-if="user">Logged in as {{ user.name }}.</span>
 <span v-else>Optional else block.</span>
 ```
-
-If you want to leave the HTML on the page, but just hide it, use `v-show` instead.
-
-```html
-<span v-show="user">Logged in as {{ user.name }}.</span>
-```
----
 Use the `key` attribute on elements inside of `v-if` blocks to help Vue destroy instead of reuse children.
 
 ```html
@@ -219,7 +229,14 @@ Use the `key` attribute on elements inside of `v-if` blocks to help Vue destroy 
    <input type="text" key="text-input">
 </span>
 ```
+
+If you want to leave the HTML on the page, but just hide it, use `v-show` instead.
+
+```html
+<span v-show="user">Logged in as {{ user.name }}.</span>
+```
 ---
+
 ### `v-for` Directive
 
 Create an element for every item in the list. Include a `key` attribute with unique identifiers to help Vue render efficiently.
@@ -246,27 +263,22 @@ Create an element for every item in the list. Include a `key` attribute with uni
 ---
 Trigger Updates:
 
-* list.push()
-* list.pop()
-* list.shift()
-* list.unshift()
-* list.splice()
-* list.sort()
-* list.reverse()
-* list = list.filter(filterFn)
----
-### `v-bind:attr` Directive
+* `list.push()`
+* `list.pop()` 
+* `list.shift()`
+* `list.unshift()`
+* `list.splice()`
+* `list.sort()`
+* `list.reverse()`
+* `list = list.filter(filterFn)`
 
-Connects components state and any HTML attribute.
 
-```html
-<progress v-bind:value="currentStep" max="10"></progress>
-<progress :value="currentStep" max="10"></progress>
-```
+* JS Array docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
 ---
 ### `v-on:event` Directive
 
-Listen to HTML and component events. $event is the event that is firing and is necessary when using native HTML elements. Most Vue components fire events with simple data.
+Listen to HTML and component events. `$event` is the event that is firing and is necessary when using native HTML elements. Most Vue components fire events with simple data.
 
 ```html
 <input v-on:change="name = $event.target.value">
