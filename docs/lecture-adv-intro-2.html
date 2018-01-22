@@ -141,18 +141,30 @@ Vue.component('my-component', {
 
 ## Events and `v-on` Directive
 
-* Pass data
-* Update DOM
-* Call an API
-* Much more
 * Use `this.$emit` to create an event
+
+```js
+methods: {
+  createEvent: function() { this.$emit('my-event')}
+}
+```
+
 * Subscribe to event by `v-on:event-name` or `@event-name`
 
+```html
+  <my-component v-on:my-event="doSomething"></my-component>
+```
+
+* You can
+  * Pass data
+  * Update DOM
+  * Call an API
+  * Much more
 ---
 
 ### Event Examples
 
-Inputs fire their own events.
+Events like `click`, `change` etc. are built into Javascript by default, so Vue can use them.
 
 ```js
 Vue.component('my-component', {
@@ -163,12 +175,13 @@ Vue.component('my-component', {
 });
 ```
 
-Components can trigger custom events too.
+Your components can trigger custom events too.
+
 ```js
 Vue.component('my-component', {
   template: `<button v-on:click="handleClick">click me</button>`,
   methods: {
-    handleClick () { this.$emit('anything'); }
+    handleClick () { this.$emit('my-custom-event'); }
   }
 });
 ```
@@ -261,7 +274,17 @@ var app = new Vue({
 ```
 ---
 ### Final Exercise
-Create an invoice demo that allows a user to enter a customer's name, a list of products purchased, and an calculated total price. Create the HTML layout, break it into components, add props, then add events to buttons and handle those events.
+Create an invoice demo that allows a user to enter: 
+* a customer's name 
+* a list of products purchased
+* a calculated total price. 
+
+
+1. Create the HTML layout,
+2. break it into components
+3. add props
+4. add events to buttons
+5. handle those events.
 
 #### Break Up Code
 ---
@@ -319,14 +342,19 @@ Create an element for every item in the list. Include a `key` attribute with uni
 ---
 Trigger Updates:
 
-* list.push()
-* list.pop()
-* list.shift()
-* list.unshift()
-* list.splice()
-* list.sort()
-* list.reverse()
-* list = list.filter(filterFn)
+* `list.push()`
+* `list.pop()` 
+* `list.shift()`
+* `list.unshift()`
+* `list.splice()`
+* `list.sort()`
+* `list.reverse()`
+* `list = list.filter(filterFn)`
+
+
+* JS Array docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+
 ---
 ### `v-bind:attr` Directive
 
@@ -339,7 +367,7 @@ Connects components state and any HTML attribute.
 ---
 ### `v-on:event` Directive
 
-Listen to HTML and component events. $event is the event that is firing and is necessary when using native HTML elements. Most Vue components fire events with simple data.
+Listen to HTML and component events. `$event` is the event that is firing and is necessary when using native HTML elements. Most Vue components fire events with simple data.
 
 ```html
 <input v-on:change="name = $event.target.value">
