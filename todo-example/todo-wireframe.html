@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <style>
+        .wrapper {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .red-border {
+            border: 1px solid red;
+        }
+
+        .blue-border {
+            border: 1px solid blue;
+        }
+
+        .green-border {
+            border: 1px solid green;
+        }
+
+        .pink-border {
+            border: 1px solid purple;
+        }
+
+        .yellow-border {
+            border: 1px solid orangered;
+        }
+    </style>
+    <div class=wrapper>
+        <div>
+            <p>This wireframe shows the static html of out app.</p>
+            <p>The borders around elements represent components that you should extract and give functionality.</p>
+        </div>
+        <div class="red-border">
+            <h1>Super Rad Todo List</h1>
+            <label for="todo-input">Add Todo</label>
+            <input id="todo-input" />
+            <button>Add</button>
+        </div>
+        <ul class="blue-border">
+            <li class="">
+                Get milk
+                <div>
+                    <button>Complete</button>
+                    <button>Remove</button>
+                    <button>Edit</button>
+                </div>
+            </li>
+            <li class="green-border">
+                Call family
+                <div>
+                    <button>Complete</button>
+                    <button>Remove</button>
+                    <button>Edit</button>
+                </div>
+            </li>
+            <li>
+                Go the the gym
+                <div>
+                    <button>Complete</button>
+                    <button>Remove</button>
+                    <button>Edit</button>
+                </div>
+            </li>
+            <li class="yellow-border">
+                <input/>
+                <button>Done</button>
+            </li>
+        </ul>
+        <div class="pink-border">
+            <h2>Completed</h2>
+            <ul>
+                <li>Write Vue wireframe</li>
+            </ul>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

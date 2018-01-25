@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <style>
+        .wrapper {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+    </style>
+    <div id="app">
+        <custom-event-catcher/>
+    </div>
+    <script>
+        Vue.component('custom-event-catcher', {
+            template:  `
+            <div class="wrapper">
+                <p>You've created {{eventCounter}} custom events.</p>
+                <custom-event-thrower @my-custom-event="eventCounter++"/>
+            </div>`,
+            data: function(){
+                return { eventCounter: 0 }
+            }
+        })
+
+        Vue.component('custom-event-thrower', {
+            template: `
+                <button id="butt" @click="$emit('my-custom-event')">Create Custom Event</button>
+            `
+        })
+
+        var app = new Vue({
+            el: "#app"
+        });
+    </script>
+</body>
+
+</html>

@@ -195,15 +195,16 @@ var app = new Vue({
 ```
 ---
 ### Final Exercise
-Create an invoice demo that allows a user to enter: 
-* a customer's name 
-* a list of products purchased
-* a calculated total price. 
+Create an todo list app that allows a user to: 
+* Enter a task 
+* Edit a task in the list
+* Delete a task
+* Complete a task, moving it to completed
 
 
 1. Create the HTML layout,
 2. break it into components
-3. add props
+3. add props and state
 4. add events to buttons
 5. handle those events.
 
