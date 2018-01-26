@@ -1,0 +1,145 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <style>
+        .wrapper {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .list-data {
+            display: inline-flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-content: center;
+            width: 300px;
+        }
+    </style>
+    <div id="app">
+        <wrapper/>
+    </div>
+    <script>
+        Vue.component('wrapper', {
+            template: `
+    <div class="wrapper">
+        <person-creator @add-person="addPerson"/>
+        <person-list @remove-person="removePerson" v-model="people" v-bind:peopleList="people"/>
+    </div>`,
+            data: function () {
+                return {
+                    people: [{
+                        first: "Timothy",
+                        last: "Typist",
+                        languages: ["C", "C++", "Javascript"]
+                    }, {
+                        first: "Hannah",
+                        last: "Hacker",
+                        languages: ["Perl", "Haskell", "Rust"]
+                    }]
+                }
+            },
+            methods: {
+                removePerson: function (person) {
+                    this.people = this.people.filter(function (p) {
+                        return p !== person;
+                    })
+                },
+                addPerson: function (person) {
+                    var newbie = person.name.split(" ");
+                    var languages = person.languages.split(",");
+                    if (newbie.length > 1) {
+                        this.people.push({
+                            languages: languages,
+                            first: newbie[0],
+                            last: newbie[1],
+                        })
+                    } else {
+                        this.people.push({
+                            languages: languages,
+                            first: newbie[0],
+                            last: ""
+                        })
+                    }
+
+                }
+            }
+        })
+
+        Vue.component('person-creator', {
+            template: `
+            <form @submit.prevent="$emit('add-person', {name, languages})">
+                <div class="wrapper">
+                    <label for="newbie">Person Name</label>
+                    <input id="name" v-model="name" />
+                    <label for="languages">Languages</label>
+                    <input id="languages" v-model="languages" />
+                    <button type="submit">Add Person</button>
+                </div>
+            </form>`,
+            data: function () {
+                return {
+                    name: "",
+                    languages: []
+                }
+            }
+        })
+
+        Vue.component('person-list', {
+            template: `
+    <ul>
+        <person 
+            v-for="person in peopleList" :person="person" 
+            @remove-person="$emit('remove-person', person)"/>
+    </ul>`,
+            props: {
+                peopleList: Array
+            }
+        })
+
+        Vue.component('person', {
+            template: `
+            <li :key="person.first">
+                <div class="list-data">
+                    <span v-if="person.last">{{fullName}}</span> 
+                    <span v-else>{{this.person.first}}</span> &nbsp;
+                    <button @click="$emit('remove-person', person)">
+                        Remove {{this.person.first}}
+                    </button>
+                </div>
+                <languages :languages="person.languages" />
+            </li>`,
+            props: ['person'],
+            computed: {
+                fullName: function () {
+                    return `${this.person.first} ${this.person.last}`
+                }
+            }
+        })
+
+        Vue.component("languages", {
+            template: `
+    <div>
+        <ul>
+            <li v-for="lang in languages">
+                {{lang}}        
+            </li>
+        </ul>
+    </div>`,
+            props: ["languages"]
+        })
+
+        var app = new Vue({
+            el: "#app"
+        });       
+    </script>
+    <script src="./vue-components.js"></script>
+</body>
+
+</html>
